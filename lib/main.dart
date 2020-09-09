@@ -1,23 +1,21 @@
+import 'package:dress_me_up/authentication/signin.dart';
 import 'package:flutter/material.dart';
-import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
-    return LitAuthInit(
-      child: MaterialApp(
-        home: Login(),
-      ),
+    return MaterialApp(
+        home: SignIn(),
     );
   }
+
 }
-
-
-

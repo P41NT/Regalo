@@ -22,10 +22,9 @@ InputDecoration registerInputDecoration({String hintText}) {
   );
 }
 
-InputDecoration signInInputDecoration({String hintText}) {
+InputDecoration signInInputDecoration({String hintText,Icon prefix}) {
   return InputDecoration(
-    prefixIcon: Icon(Icons.email),
-    labelText:"E-mail",
+    prefixIcon: prefix,
     contentPadding: const EdgeInsets.symmetric(vertical: 18.0),
     hintStyle: const TextStyle(fontSize: 18),
     hintText: hintText,

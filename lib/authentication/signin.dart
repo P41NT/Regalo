@@ -21,7 +21,20 @@ class _SignInState extends State<SignIn> {
   String email;
   String password;
   GlobalKey<FormState> FormKey = GlobalKey<FormState>();
-
+  void login() {
+    if (FormKey.currentState.validate()) {
+      FormKey.currentState.save();
+      signin(email, password, context).then((value) {
+        if (value != null) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ));
+        }
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -71,7 +84,7 @@ class _SignInState extends State<SignIn> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal:10.0),
                         child: FlatButton(
-                          onPressed: () => signIn(email, password).whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()))),
+                          onPressed: () => login(),
                           child: Text(
                             "Sign In",
                             style: TextStyle(color: Colors.white),

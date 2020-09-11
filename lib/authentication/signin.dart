@@ -1,9 +1,10 @@
 import 'package:dress_me_up/authentication/signup.dart';
-import 'package:dress_me_up/decoration.dart';
-import 'package:dress_me_up/home.dart';
+import 'package:dress_me_up/components/decoration.dart';
+import 'package:dress_me_up/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:dress_me_up/authentication/signin.dart';
 import 'package:dress_me_up/authentication/controllers/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 // class SignIn extends StatelessWidget {
@@ -25,11 +26,12 @@ class _SignInState extends State<SignIn> {
     if (FormKey.currentState.validate()) {
       FormKey.currentState.save();
       signin(email, password, context).then((value) {
+        User user = FirebaseAuth.instance.currentUser;
         if (value != null) {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => Home(),
+                builder: (context) => Home(uid: user.uid,),
               ));
         }
       });

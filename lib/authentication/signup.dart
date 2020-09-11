@@ -1,7 +1,7 @@
 import 'package:dress_me_up/authentication/controllers/authentication.dart';
 import 'package:dress_me_up/authentication/signup.dart';
-import 'package:dress_me_up/decoration.dart';
-import 'package:dress_me_up/home.dart';
+import 'package:dress_me_up/components/decoration.dart';
+import 'package:dress_me_up/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dress_me_up/authentication/signin.dart';
@@ -21,11 +21,7 @@ class _SignUpState extends State<SignUp> {
       formKey.currentState.save();
       signUp(email.trim(), password, context).then((value) {
         if (value != null) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Home(),
-              ));
+          Navigator.pop(context);
         }
       });
     }

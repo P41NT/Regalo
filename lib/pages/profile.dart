@@ -1,3 +1,4 @@
+import 'package:dress_me_up/authentication/controllers/authentication.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -8,9 +9,11 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue,title: Text("Dress Me Up",)),
-      body: Center(child: Text("Profile"),),
-    );
+    return Container(child: Center(child: Column(
+      children: [
+        Text("Profile"),
+        RaisedButton(onPressed:() => signOutUser())
+      ],
+    ),),);
   }
 }

@@ -2,33 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 final gooleSignIn = GoogleSignIn();
 
-// a simple sialog to be visible everytime some error occurs
-showErrDialog(BuildContext context, String err) {
-  // to hide the keyboard, if it is still p
-  FocusScope.of(context).requestFocus(new FocusNode());
-  return showDialog(
-    context: context,
-    child: AlertDialog(
-      title: Text("Error"),
-      content: Text(err),
-      actions: <Widget>[
-        OutlineButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text("Ok"),
-        ),
-      ],
-    ),
-  );
-}
-
-// many unhandled google error exist
-// will push them soon
 Future<bool> googleSignIn() async {
   GoogleSignInAccount googleSignInAccount = await gooleSignIn.signIn();
 
@@ -52,34 +30,45 @@ Future<bool> googleSignIn() async {
 // instead of returning true or false
 // returning user to directly access UserID
 Future<User> signin(
-    String email, String password, BuildContext context) async {
+String email, String password, BuildContext context) async {
   try {
-    UserCredential result = await auth.signInWithEmailAndPassword(email: email, password: email);
+    if(email == password){
+      print("Wrong Password");
+      return null;
+    }
+    UserCredential result = await auth.signInWithEmailAndPassword(email: email, password: password);
+    print(result);
     User user = result.user;
     // return Future.value(true);
     if (user.emailVerified) return Future.value(user);
+    else print("User Not Verified");
     return null;
-  } catch (e) {
-    // simply passing error code as a message
+  } catch (e){
     print(e.code);
+    Alert(context: context, title: "Error", desc: e).show();
     switch (e.code) {
       case 'ERROR_INVALID_EMAIL':
-        showErrDialog(context, e.code);
+        print(e.code);
         break;
       case 'ERROR_WRONG_PASSWORD':
-        showErrDialog(context, e.code);
+        print(e.code);
+        Alert(context: context, title: "Error", desc: "Wrong Password").show();
         break;
       case 'ERROR_USER_NOT_FOUND':
-        showErrDialog(context, e.code);
+        print(e.code);
+        Alert(context: context, title: "Error", desc: "User Not Found").show();
         break;
       case 'ERROR_USER_DISABLED':
-        showErrDialog(context, e.code);
+        print(e.code);
+        Alert(context: context, title: "Error", desc: "Account is Disabled").show();
         break;
       case 'ERROR_TOO_MANY_REQUESTS':
-        showErrDialog(context, e.code);
+        print(e.code);
+        Alert(context: context, title: "Error", desc: "Too Many Requests..Try Again Later").show();
         break;
       case 'ERROR_OPERATION_NOT_ALLOWED':
-        showErrDialog(context, e.code);
+        print(e.code);
+        Alert(context: context, title: "Error", desc: "Operation Not Allowed! No funny business here!").show();
         break;
     }
     // since we are not actually continuing after displaying errors
@@ -103,13 +92,16 @@ Future<User> signUp(
     print(error.code);
     switch (error.code) {
       case 'ERROR_EMAIL_ALREADY_IN_USE':
-        showErrDialog(context, "Email Already Exists");
+        print("Email Already Exists");
+        Alert(context: context, title: "Error", desc: "E-Mail Exists").show();
         break;
       case 'ERROR_INVALID_EMAIL':
-        showErrDialog(context, "Invalid Email Address");
+        print("Invalid Email Address");
+        Alert(context: context, title: "Error", desc: "Invalid Email Address").show();
         break;
       case 'ERROR_WEAK_PASSWORD':
-        showErrDialog(context, "Please Choose a stronger password");
+        print("Please Choose a stronger password");
+        Alert(context: context, title: "Warning", desc: "Password Too Weak").show();
         break;
     }
     return Future.value(null);
@@ -120,8 +112,15 @@ Future<bool> signOutUser() async {
   User user = await auth.currentUser;
   print(user.providerData[1].providerId);
   if (user.providerData[1].providerId == 'google.com') {
-    await gooleSignIn.disconnect();
+    await gooleSignIn.signOut();
   }
   await auth.signOut();
+  print("Trying to log out user... Status : ");
+  print(auth.currentUser == null);
   return Future.value(true);
+}
+
+Future<bool> isUserLoggedIn() async {
+  var user = await auth.currentUser;
+  return user != null;
 }

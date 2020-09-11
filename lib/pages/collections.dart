@@ -1,3 +1,6 @@
+import 'package:dress_me_up/authentication/controllers/authentication.dart';
+import 'package:dress_me_up/authentication/signin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Collections extends StatefulWidget {
@@ -8,9 +11,8 @@ class Collections extends StatefulWidget {
 class _CollectionsState extends State<Collections> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue,title: Text("Dress Me Up",)),
-      body: Center(child: Text("Collections"),),
+    return Container(
+
     );
   }
 }

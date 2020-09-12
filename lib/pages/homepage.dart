@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dress_me_up/authentication/controllers/authentication.dart';
+import 'package:dress_me_up/components/recRow.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,24 +27,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //print(FirebaseFirestore.instance.collection("users").doc(uid).get());
     return Container(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("users").snapshots(),
+        stream: FirebaseFirestore.instance.collection("users").doc("6XvQYYodcqWSAPqcQZrJ8FDXd7u1").snapshots(),
         builder: (context,snapshot){
           if(!snapshot.hasData)
             return Text("Loading");
           else{
             return Column(
               children: [
-                Row(
-                  children: [
-                    Text("Hello "+snapshot.data.documents[0].get("Name")),
-                  ],
-                )
-              //Text("hole")
-            ],
-          );
+                Text("Hello " + snapshot.data.get("Name")),
+                RecRow(title: "Get Stylish For Work",tag:"office"),
+              ],
+            );
           }
         },
       ),

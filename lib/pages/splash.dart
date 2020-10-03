@@ -19,7 +19,7 @@ class _SplashState extends State<Splash> {
     //await signOutUser();
     if(await FirebaseAuth.instance.currentUser != null){
       print(FirebaseAuth.instance.currentUser);
-      Timer(Duration(seconds: 3),() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home())));
+      Timer(Duration(seconds: 3),() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn())));
     }
     else{
       //print(FirebaseAuth.instance.currentUser.uid);

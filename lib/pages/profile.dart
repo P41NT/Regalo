@@ -1,4 +1,5 @@
 import 'package:dress_me_up/authentication/controllers/authentication.dart';
+import 'package:dress_me_up/authentication/signin.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -12,7 +13,7 @@ class _ProfileState extends State<Profile> {
     return Container(child: Center(child: Column(
       children: [
         Text("Profile"),
-        RaisedButton(onPressed:() => signOutUser())
+        RaisedButton(color:Colors.red, child: Text("Sign Out"), onPressed:() => signOutUser().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()))))
       ],
     ),),);
   }

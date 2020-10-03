@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:dress_me_up/authentication/signin.dart';
 import 'package:dress_me_up/authentication/controllers/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:dress_me_up/pages/reset_password.dart';
 
 
 // class SignIn extends StatelessWidget {
@@ -32,7 +34,8 @@ class _SignInState extends State<SignIn> {
               context,
               MaterialPageRoute(
                 builder: (context) => Home(uid: user.uid,),
-              ));
+              )
+          );
         }
       });
     }
@@ -44,7 +47,7 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.blue,
         body: Center(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.7,
             width: MediaQuery.of(context).size.width * 0.8,
             child: Form(
               key: FormKey,
@@ -107,7 +110,8 @@ class _SignInState extends State<SignIn> {
                       ),
                     ],
                   ),
-                  FlatButton(onPressed: ()=>googleSignIn().whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()))), child: Text("Sign In With Google"))//This doesnt work on my computer bcoz IOS Simulator so dint test, u test plsssss!!
+                  FlatButton(onPressed: () => googleSignIn().whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()))), child: Text("Sign In With Google")),//This doesnt work on my computer bcoz IOS Simulator so dint test, u test plsssss!!
+                  FlatButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPass())), child: Text("Forgot Password"))
                 ],
               ),
             ),
@@ -119,4 +123,6 @@ class _SignInState extends State<SignIn> {
     ],);
   }
 }
-
+/*onPressed: (){
+    auth.sendPasswordResetEmail(email: email).then((value) => Fluttertoast.showToast(msg:"Email Sent, Please Verify")).catchError((error) => Fluttertoast.showToast(msg: "Unable to Send Email"));
+  },*/

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 final gooleSignIn = GoogleSignIn();
@@ -45,7 +46,8 @@ String email, String password, BuildContext context) async {
     return null;
   } catch (e){
     print(e.code);
-    Alert(context: context, title: "Error", desc: e).show();
+    Fluttertoast.showToast(msg: e.toString());
+    //Alert(context: context, title: "Error", desc: e.toString()).show();
     switch (e.code) {
       case 'ERROR_INVALID_EMAIL':
         print(e.code);
@@ -89,6 +91,7 @@ Future<User> signUp(
     return Future.value(user);
     // return Future.value(true);
   } catch (error) {
+    Fluttertoast.showToast(msg: error.toString(),timeInSecForIosWeb: 3);
     print(error.code);
     switch (error.code) {
       case 'ERROR_EMAIL_ALREADY_IN_USE':
@@ -110,8 +113,8 @@ Future<User> signUp(
 
 Future<bool> signOutUser() async {
   User user = await auth.currentUser;
-  print(user.providerData[1].providerId);
-  if (user.providerData[1].providerId == 'google.com') {
+  //print(user.providerData[0].providerId);
+  if (user.providerData[0].providerId == 'google.com') {
     await gooleSignIn.signOut();
   }
   await auth.signOut();
@@ -124,3 +127,4 @@ Future<bool> isUserLoggedIn() async {
   var user = await auth.currentUser;
   return user != null;
 }
+

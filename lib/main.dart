@@ -5,8 +5,9 @@ import 'package:dress_me_up/pages/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:dress_me_up/pages/splashscreen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -26,20 +27,23 @@ class _MyAppState extends State<MyApp> {
       setState(() {});
     });
   }
-  void getUserData() async{
-    DocumentSnapshot variable = await FirebaseFirestore.instance.collection("users").doc("6XvQYYodcqWSAPqcQZrJ8FDXd7u1").get();
-    Map user_data = variable.data();
-    print(user_data);
+
+  void getUserData() async {
+    QuerySnapshot variable = await FirebaseFirestore.instance
+        .collection("users")
+        //.doc("6XvQYYodcqWSAPqcQZrJ8FDXd7u1")
+        .get();
+    //Map user_data = variable.data();
+    //print(user_data);
     //user_data;
   }
-  void main()async{
-    await getUserData();
-  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home: SplashScreen()
+      //home: SignIn()
+      //Home(uid: "6XvQYYodcqWSAPqcQZrJ8FDXd7u1",),
     );
   }
 }
-

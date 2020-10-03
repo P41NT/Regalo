@@ -9,15 +9,19 @@ class HomePage extends StatefulWidget {
   final String uid;
   HomePage({@required this.uid});
   _HomePageState createState() => _HomePageState(uid);
-
 }
 
 class _HomePageState extends State<HomePage> {
-  String uid = "6XvQYYodcqWSAPqcQZrJ8FDXd7u1";
-  _HomePageState(this.uid);
+  String uid;
+  _HomePageState(uid){
+    this.uid = uid;
+  }
   Map user_data;
-  void main() async{
-    DocumentSnapshot variable = await FirebaseFirestore.instance.collection("users").doc("6XvQYYodcqWSAPqcQZrJ8FDXd7u1").get();
+  void main() async {
+    DocumentSnapshot variable = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uid)
+        .get();
     Map user_data = variable.data();
     //print(user_data);
     setState(() {
@@ -29,15 +33,77 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("users").doc("6XvQYYodcqWSAPqcQZrJ8FDXd7u1").snapshots(),
-        builder: (context,snapshot){
-          if(!snapshot.hasData)
-            return Text("Loading");
-          else{
-            return Column(
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .doc(uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          DateTime now = new DateTime.now();
+          print(snapshot.toString());
+          if (!snapshot.hasData)
+            return Text("Loading...");
+          //return Text(snapshot.data.get("Name"));
+          else {
+            if (snapshot.data.get("State") == 0) {
+              //print("Student");
+              //student
+              if (now.hour < 12) {
+                print("less than 12");
+                return ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, top: 14,bottom: 20),
+                      child: Text("Hello " + snapshot.data.get("Name"), style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                    ),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "blue"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                  ],
+                );
+              } else {
+                print("after 4");
+                //after 5 anyday....
+                return ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, top: 14),
+                      child: Text("Hello " + snapshot.data.get("Name"), style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                    ),
+                    RecRow(title: "Get Stylish For Work", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "blue"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+                    RecRow(title: "Get Stylish For School", tag: "office"),
+
+                  ],
+                );
+              }
+            }
+            return ListView(
               children: [
-                Text("Hello " + snapshot.data.get("Name")),
-                RecRow(title: "Get Stylish For Work",tag:"office"),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, top: 14),
+                  child: Text("Hello " + snapshot.data.get("Name"), style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                ),
+                RecRow(title: "Get Stylish For Work", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "blue"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
+                RecRow(title: "Get Stylish For School", tag: "office"),
               ],
             );
           }

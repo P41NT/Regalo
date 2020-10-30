@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "654989599217",
+    "firebase_url": "https://dressmeup-2db5f.firebaseio.com",
+    "project_id": "dressmeup-2db5f",
+    "storage_bucket": "dressmeup-2db5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654989599217:android:be705f8a780a4adfcb2450",
+        "android_client_info": {
+          "package_name": "com.shawn.dress_me_up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654989599217-r7o88nul52pngkcc8vegjjpvhspc9nv0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shawn.dress_me_up",
+            "certificate_hash": "fb9232efa564ebf3ff67952493e9d1082a7bd0b7"
+          }
+        },
+        {
+          "client_id": "654989599217-bgplmn8adhkch930v3igbfo5j5dmlh43.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shawn.dress_me_up",
+            "certificate_hash": "5f0efd89ad84bda8dddb496df25bf0b574276496"
+          }
+        },
+        {
+          "client_id": "654989599217-k439mgkenn2l9idp3957c7f111cop34j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shawn.dress_me_up",
+            "certificate_hash": "8a63f7239a67fbb87d325620a6d3b6d4047063ce"
+          }
+        },
+        {
+          "client_id": "654989599217-ptihl3cn68fqot2rtucna8tlboo2m009.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5N_Ia4GJ8HHscyYlmJCdaqLW6NgNs_7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654989599217-ptihl3cn68fqot2rtucna8tlboo2m009.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654989599217-4lc38o6pnejiktgiu6m8vf5rnn7ru5o8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shawn.dressMeUp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

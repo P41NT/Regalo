@@ -1,6 +1,10 @@
-# dress_me_up
+# Regalo
 
-A new Flutter application.
+This is an app created by me and my friend.
+
+This app recommends you the perfect outfit for any occassion, it also gives you links so you can buy the products.
+
+We have also published this app on the google play store. Here is the link : https://play.google.com/store/apps/details?id=com.shawn.dress_me_up
 
 ## Getting Started
 
